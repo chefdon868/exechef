@@ -1,0 +1,57 @@
+{
+  "name": "exechef-cogs-analysis",
+  "description": "ExeChef COGs Analysis System - Daily cost of goods tracking and analysis",
+  "repository": "https://github.com/exechef/cogs-analysis",
+  "logo": "https://node-js-sample.herokuapp.com/node.png",
+  "keywords": ["node", "express", "react", "cogs", "analytics", "dashboard"],
+  "env": {
+    "JWT_SECRET": {
+      "description": "A secret key for verifying the integrity of signed JWT tokens",
+      "generator": "secret"
+    },
+    "ADMIN_EMAIL": {
+      "description": "Email address for the admin user",
+      "value": ""
+    },
+    "ADMIN_PASSWORD": {
+      "description": "Password for the admin user (min 8 characters)",
+      "value": ""
+    },
+    "DOMAIN_NAME": {
+      "description": "Your domain name (e.g., exechef.com)",
+      "value": "exechef.com"
+    },
+    "API_SUBDOMAIN": {
+      "description": "Subdomain for the API (e.g., api for api.exechef.com)",
+      "value": "api"
+    },
+    "EMAIL_VERIFICATION_REQUIRED": {
+      "description": "Require email verification for new users",
+      "value": "true"
+    },
+    "ADMIN_APPROVAL_REQUIRED": {
+      "description": "Require admin approval for new users",
+      "value": "true"
+    }
+  },
+  "addons": [
+    "heroku-postgresql:hobby-dev",
+    "sendgrid:starter",
+    "papertrail:choklad"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "scripts": {
+    "postdeploy": "npm run migrate && npm run seed-admin"
+  },
+  "success_url": "/setup-complete"
+}
