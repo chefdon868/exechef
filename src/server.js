@@ -28,11 +28,13 @@ if (process.env.NODE_ENV === 'production') {
 const authRoutes = require('./routes/authRoutes');
 const importRoutes = require('./routes/importRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
+const contactRoutes = require('./routes/contactRoutes');
 
 // API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/import', importRoutes);
 app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/forms', contactRoutes);
 
 // Health check route
 app.get('/api/health', (req, res) => {
