@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TV Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="grid">
+    <section class="clock-card">
+      <div id="time" class="time">--:--:--</div>
+      <div id="date" class="date"></div>
+    </section>
+    <section class="tile" id="tile-pulse">
+      <div class="label">Pulse</div>
+      <canvas id="wave" width="800" height="240"></canvas>
+    </section>
+    <section class="tile" id="tile-count">
+      <div class="label">Seconds since midnight</div>
+      <div id="secs" class="big">0</div>
+      <div class="bar"><div id="bar-fill"></div></div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
