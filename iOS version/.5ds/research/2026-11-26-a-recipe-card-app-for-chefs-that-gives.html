@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; script-src 'unsafe-inline'">
+<title>Market research</title>
+<style>
+/* The approved design (docs/framework-review/2026-11-13-research-test/design/index.html, Omar 13 Nov 14:06): the 5daysprint.com idea
+   page, white cards with light borders, small grey labels, Helvetica, medium values, semibold only for headings. */
+:root { --ink: #111827; --body: #374151; --label: #9ca3af; --line: #e1e8f0; --ground: #ffffff; --blue: #1f4fff; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--ground); color: var(--ink); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.55; letter-spacing: -0.005em; -webkit-font-smoothing: antialiased; overflow-wrap: break-word; }
+a { color: var(--blue); text-decoration: none; }
+.page { max-width: 1080px; margin: 0 auto; padding: 28px 24px 64px; }
+.mast { display: flex; align-items: center; gap: 9px; font-size: 13px; color: var(--body); margin-bottom: 36px; }
+.mast img { width: 24px; height: 24px; }
+.mast .grow { flex: 1; }
+.save { font: inherit; font-size: 13px; color: var(--ink); background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+.eyebrow { font-size: 13px; color: var(--label); margin: 0 0 8px; }
+h1 { font-size: 40px; line-height: 1.15; letter-spacing: -0.02em; font-weight: 600; margin: 0 0 10px; max-width: 760px; }
+.lede { font-size: 16px; color: #6b7280; margin: 0 0 32px; max-width: 700px; }
+.grid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 24px; align-items: start; }
+.card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 22px 24px; margin-bottom: 20px; }
+h2 { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 14px; }
+.label { font-size: 12px; color: var(--label); }
+.answer { font-size: 22px; line-height: 1.3; letter-spacing: -0.015em; font-weight: 500; margin: 0 0 10px; }
+.card p { margin: 0; color: var(--body); }
+.facts { position: sticky; top: 20px; padding: 6px 20px 8px; }
+.row { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+.row:last-of-type { border-bottom: 0; }
+.row .label { font-size: 13px; flex: none; }
+.row .v { color: var(--ink); font-weight: 500; text-align: right; min-width: 0; overflow-wrap: anywhere; word-break: normal; }
+.row .v.short-v { overflow-wrap: normal; white-space: nowrap; }
+.v.up { color: #16a34a; } .v.mid { color: #ea7a0c; } .v.down { color: #dc2626; }
+.facts .note { font-size: 12px; color: #6b7280; padding: 10px 0 6px; border-top: 1px solid var(--line); }
+.comp { border-top: 1px solid var(--line); }
+.co { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.co:last-child { border-bottom: 0; padding-bottom: 0; }
+.co .nm { font-weight: 500; min-width: 0; }
+.co .nm small { display: block; font-weight: 400; font-size: 12.5px; color: var(--label); }
+.co .tag { display: inline-block; margin-top: 6px; font-size: 11.5px; color: var(--blue); background: #eef2ff; border-radius: 999px; padding: 2px 8px; }
+.co .what { color: var(--body); font-size: 14px; }
+.co .price { font-size: 13px; color: var(--ink); font-weight: 500; margin-top: 4px; }
+.co .short { font-size: 13px; color: #6b7280; margin-top: 2px; }
+.none { color: var(--label); font-weight: 400; }
+.figs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.fig .n { font-size: 24px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 4px; }
+.fig p { font-size: 13px; color: #6b7280; }
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; margin-bottom: 20px; }
+.two .card { margin-bottom: 0; }
+ol.pts { list-style: none; margin: 0; padding: 0; counter-reset: p; }
+ol.pts li { counter-increment: p; display: grid; grid-template-columns: 22px minmax(0, 1fr); padding: 11px 0; border-top: 1px solid var(--line); font-size: 14px; color: var(--body); }
+ol.pts li::before { content: counter(p); color: var(--label); font-size: 13px; }
+ol.pts li span { display: block; color: var(--ink); font-weight: 500; }
+ul.sig { list-style: none; margin: 0; padding: 0; }
+ul.sig li { padding: 11px 0; border-top: 1px solid var(--line); font-size: 14px; color: var(--body); }
+ol.src { margin: 0; padding-left: 22px; font-size: 12.5px; color: #6b7280; }
+ol.src li { margin-bottom: 4px; }
+.foot { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--label); margin-top: 28px; }
+.foot img { width: 16px; height: 16px; }
+@media (max-width: 860px) {
+  .grid, .two { grid-template-columns: minmax(0, 1fr); }
+  .facts { position: static; }
+  .two .card { margin-bottom: 20px; } .two { margin-bottom: 0; }
+  .figs { grid-template-columns: minmax(0, 1fr); }
+  .co { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  h1 { font-size: 28px; }
+  .page { padding: 20px 16px 48px; }
+}
+@media print {
+  @page { size: A4; margin: 12mm; }
+  body { background: #fff; font-size: 11.5px; } .page { padding: 0; max-width: none; }
+  .save { display: none; } .card { break-inside: avoid; } .facts { position: static; }
+  .grid { grid-template-columns: minmax(0, 1fr) 210px; }
+  .card.long { break-inside: auto; } .co, ol.pts li, ul.sig li { break-inside: avoid; }
+  .card p, .co .what, ul.sig li, ol.pts li { font-size: 11.5px; } .co .price, .co .short, .row { font-size: 11px; } .card .answer { font-size: 17px; } .fig .n { font-size: 18px; }
+  .two { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .co { grid-template-columns: 130px minmax(0, 1fr); }
+  h1 { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+<div class="page" id="page"></div>
+<script type="application/json" id="report-data">{"title":"Restaurant Recipe and Allergen Cards","idea":"A recipe card app for chefs that gives front-of-house and back-of-house recipe cards, clear photos, a QR code that shows dish detail, and a very clear allergen matrix so staff can advise guests with confidence","date":"2026-11-26","lede":"Head chefs and kitchen managers at restaurants and hotels need one reliable place for staff recipe cards, dish photos, QR details, and allergen answers.","summary":"The idea enters a crowded but real category. Dishcard already covers the closest core: QR dish details and a clear allergen matrix. The best opening is simpler, photo-led staff cards for both kitchen and service teams. Which part would you like to test first?","verdict":"Worth testing, if you focus on staff speed.","why":"Several products already connect recipes, allergens, food costs, and QR menus, so the broad idea is not empty. The strongest opening is a very simple workflow for busy teams: one approved recipe record feeding both kitchen cards and guest-facing dish details. The results did not establish verified complaints, worldwide demand size, or whether competitors support both front-of-house and back-of-house cards.","opening":"A small first version could focus on one restaurant: photo-led kitchen cards, a staff-safe QR dish page, and a dated allergen matrix that updates from the same ingredient list. The clearest gap is the simple handoff between kitchen instructions and front-of-house guest questions.","competitors":[{"name":"Dishcard","url":"http://dishcard.app/","what":"Creates a printable allergen matrix, QR menu, dish details, and ingredient records for restaurant teams.","price":{"low":19,"high":null,"currency":"USD","period":"month"},"note":"Its main focus is a clear allergen matrix, QR dish details, printable records, and unlimited dishes and teammates; no customer complaints were found.","closest":true,"source":6,"unverified":false},{"name":"Qubi","url":"https://www.qubisoftware.com/","what":"Links recipes and ingredients to costs, allergen information, and QR guest menus.","price":null,"note":"Combines recipe costing, allergen books, QR menus, nutrition, and multiple languages; public pricing was not found.","closest":false,"source":3,"unverified":false},{"name":"Nutri-Scheme","url":"https://nutri-scheme.com/","what":"Converts recipes into nutrition, allergen, food-cost, and QR menu information for hospitality businesses.","price":{"low":59.99,"high":399.99,"currency":"EUR","period":"year"},"note":"Offers a broad nutrition and menu system rather than a narrowly focused staff recipe-card tool.","closest":false,"source":5,"unverified":false},{"name":"meez","url":"","what":"Provides restaurant recipe management, standardization, food costing, and menu planning.","price":{"low":19,"high":null,"currency":"USD","period":"month"},"note":"Strong on recipe standardization and food costing, but the source did not confirm QR guest pages or an allergen matrix.","closest":false,"source":4,"unverified":false},{"name":"Apicbase","url":"","what":"Centralizes recipes, allergen information, food costs, purchasing, and operations for foodservice groups.","price":null,"note":"Built for restaurant and foodservice groups with centralized recipes, costs, procurement, and allergens; pricing is quote-based.","closest":false,"source":2,"unverified":false},{"name":"FoodNotify","url":"","what":"Combines purchasing, recipe management, and allergen management for hotels and restaurants.","price":null,"note":"Targets hotels and larger food-and-beverage groups with advanced purchasing and allergen management; pricing is quote-based.","closest":false,"source":2,"unverified":false},{"name":"Flipdish","url":"","what":"Provides live digital menus and ordering with allergen filtering and integrations.","price":{"low":69,"high":null,"currency":"EUR","period":"month"},"note":"Connects allergen information to ordering, menus, kiosks, and point-of-sale systems, but is broader than recipe cards.","closest":false,"source":10,"unverified":false}],"figures":[{"value":"USD 19 per month","what":"Dishcard's listed price for one restaurant, with unlimited dishes and teammates.","source":6,"unverified":false},{"value":"EUR 59.99 to 399.99 per year","what":"Nutri-Scheme's listed Basic, Advanced, and higher annual prices.","source":5,"unverified":false},{"value":"35 tools","what":"The reviewed restaurant recipe software list contains 35 tools.","source":1,"unverified":false}],"signals":[{"text":"Qubi specifically links recipes, allergen books, and QR menus so staff and guests consult matching information.","source":3,"unverified":false},{"text":"Dishcard offers a readable allergen matrix, QR dish details, printable records, and unlimited dishes and teammates for USD 19 per month.","source":6,"unverified":false},{"text":"A hospitality software review says printed allergen matrices carry operational risk and highlights demand for automatic recipe-level allergen inheritance.","source":10,"unverified":false},{"text":"A chef said their kitchen uses Pestle so recipes are shared among all chefs.","source":12,"unverified":false,"from":"demand"},{"text":"One person still writes recipes on cue cards, photographs the cards, and stores the photos in a phone folder.","source":12,"unverified":false,"from":"demand"},{"text":"A restaurant user wanted one system for scaling recipes, nutrition, allergy information, ordering, and inventory.","source":16,"unverified":false,"from":"demand"},{"text":"A user said their company uses xtraCHEF but that it has flaws.","source":16,"unverified":false,"from":"demand"},{"text":"A user said ReciMe had useful features but was too expensive for their budget.","source":16,"unverified":false,"from":"demand"},{"text":"A food-allergy user said sending an allergy card directly to the kitchen made a complicated situation much easier.","source":17,"unverified":false,"from":"demand"}],"hard":[{"title":"Many close alternatives","text":"Crowded category"},{"title":"Allergen errors","text":"Safety responsibility"},{"title":"Hard staff adoption","text":"Complex kitchen use"}],"next":[{"title":"Interview kitchen teams","text":"Test whether chefs prefer staff-only cards, guest QR pages, or both, and which information they check during service."},{"title":"Run a hands-on comparison","text":"Compare Dishcard, Qubi, and Nutri-Scheme in real kitchens for setup time, photo use, allergen updates, and staff speed."},{"title":"Validate safety controls","text":"Ask an allergen-safety professional to review the proposed workflow and define approval, update, and audit steps."}],"levels":{"competition":"Crowded","demand":"Some","timing":"Good"},"pay":"USD 19 per month to EUR 399.99 per year","for_label":"Restaurant kitchen leaders","where_label":"Worldwide hotel kitchens","not_found":["Verified user complaints for the named competitors","A worldwide count of restaurants or hotels needing this","Search-volume or trend data for recipe-card and allergen-matrix software","Public prices for Qubi, Apicbase, and FoodNotify","Proof that listed competitors provide both front-of-house and back-of-house recipe cards","A real price for a restaurant recipe-card product","Recent head-chef or kitchen-manager complaints specifically about front-of-house and back-of-house","Verified demand for clear dish photos in kitchen recipe systems","Verified demand for QR codes showing dish details inside restaurant kitchens","Worldwide hotel-kitchen evidence specifically supporting this idea","A review-site source with detailed complaints about restaurant allergen matrices","A product review comparing recipe-card systems for restaurant and hotel kitchens"],"sources":[{"title":"Best Restaurant Recipe Software in 2026: Researched & Ranked","url":"https://www.itechguides.com/best/restaurant-recipe-management-software/"},{"title":"7 Best Allergen Management Software for Restaurants in 2026","url":"https://zindra.com/en/best/allergen-management-software-restaurants"},{"title":"Features | Recipes, Inventory, Orders, HACCP and Analytics","url":"https://www.qubisoftware.com/en/features"},{"title":"8 best recipe management software tools for 2026","url":"https://www.guideflow.com/blog/recipe-management-software"},{"title":"Nutri-Scheme – Recipe & Menu Management, Nutrition Analysis, …","url":"https://nutri-scheme.com/"},{"title":"Restaurant Allergen Chart Software & QR Menus | Dishcard","url":"http://dishcard.app/"},{"title":"Recipe Management Software | Costs, allergens and nutrition","url":"https://www.qubisoftware.com/en/features/recipe-management-software"},{"title":"11 Best Kitchen Management Software Platforms in 2027","url":"https://adatasol.com/best-kitchen-management-software/"},{"title":"Recipe Management Software Reviews for UK Restaurants","url":"https://www.getjelly.co.uk/blog/best-recipe-management-software-reviews/"},{"title":"Best Allergen & Food Safety Software for UK Hospitality (2026)","url":"https://www.restauranttech.co.uk/guides/best-allergen-food-safety-software-uk-hospitality-2026"},{"title":"ClearKitchen: Allergy Dining - App Store - Apple","url":"https://apps.apple.com/us/app/clearkitchen-allergy-dining/id6790840988"},{"title":"Just wondering what everyone uses to digitally organize recipes.","url":"https://www.reddit.com/r/Chefit/comments/1fwuzi2/just_wondering_what_everyone_uses_to_digitally/"},{"title":"Spokin - Manage Food Allergies - App Store","url":"https://apps.apple.com/us/app/spokin-manage-food-allergies/id1201909035"},{"title":"Food Allergy Options - App Store","url":"https://apps.apple.com/us/app/food-allergy-options/id6762036188"},{"title":"Fig: Food Scanner & Recipes - App Store - Apple","url":"https://apps.apple.com/us/app/fig-food-scanner-recipes/id1564434726"},{"title":"Programs/Apps for managing recipes, scaling recipes, costings etc","url":"https://www.reddit.com/r/Chefit/comments/voxqpk/programsapps_for_managing_recipes_scaling_recipes/"},{"title":"Restaurants refusing to reveal 'secret sauce' ingredients after allergen request","url":"https://www.reddit.com/r/FoodAllergies/comments/dmkz4e/restaurants_refusing_to_reveal_secret_sauce/"},{"title":"Is there a need for a tool to help answer customer food allergy questions?","url":"https://www.reddit.com/r/Serverlife/comments/1hyzcqv/is_there_a_need_for_a_tool_to_help_answer/"},{"title":"Curious about how allergies are handled at restaurants","url":"https://www.reddit.com/r/restaurant/comments/1tf7uiv/curious_about_how_allergies_are_handled_at/"},{"title":"xtraCHEF - Ratings & Reviews - App Store - Apple","url":"https://apps.apple.com/us/app/xtrachef/id988380179?see-all=reviews&platform=iphone"}],"facts":{"found":23,"not_found":15},"demand_note":"","display":{"currencies":{"AED":"AED ","AUD":"A$","CAD":"C$","EUR":"€","GBP":"£","INR":"₹","JPY":"¥","USD":"$"},"periods":{"hour":"an hour","once":"","week":"a week","year":"a year","month":"a month","session":"a session","user per month":"a user a month"},"tones":{"Good":"up","Open":"up","Poor":"down","Some":"mid","Thin":"down","Strong":"up","Crowded":"mid","Neutral":"","Not found":""}}}</script>
+<script>
+// Draws the report from the data above. Text goes in with textContent only, links only when they start with http, nothing loads.
+(function () {
+  var ICON = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAASV0lEQVR4nO2deXhURbqH3zrdnQVCWAUSFgk7iAhEUZJARhFwlGEcGOcRGEQG70Wvy8xlxGUYFR/35apzlVFmcx5k3B1UdMYNL5iEXUEEAQVJDEsIMYQQQjrdfer+Ud10N1m7k+5zDjnv8/QfOX3O6UrVr76q+uqrKkG8uEY6OMwQBKORjAKGIemLoCuSVATtAC1u6TEWD1CNpBJBKVAEfI3GViRbyRP745UQEdO3Z8kOaIwFJiLJQjAC6FrnV2VMU2Fe6uaDDpQA24ACYDXlbOVrURuvJLQOWXIIglkIZgDnna7XkrZb2M1FECwVH14EmxG8jIeVbBAHY/FzrUeWvBSN+cBUNDraBd4KBCqPj8NovInOXykQX7bW61tHAOPkUJzchuR6NJLtgo8BAcugUwY8h4NlrBUlrfHa6MmVSegsQnIbGt3QW5ocmyYRKKvgYx9wP/nipZa+LjpyZCaCxxBMtGu8AQhAIoHlCO4hTxRH+5rIyZHXAk+j0dOu9QajATpfATeRLwoifTwyAWRKF4ncg4PFgGbXepOgSrESnVspEMsjebT5jpeBMpFknsXJPUi78E2FKotUBMvIkXdG8mjzLECmdJHEUhz8h23yTUywNBeRJ55sziNNW4BM6SKZ/7UL3wIErfJj5MiFzXmkaQEkcR8aN9qFbxGUCDQED/o7643SeBOQI69F8A9km5mkOXtQw8QKBBPJE180dlv9jJdjkPwLQQ+7w2dR1BBxC3Al+eJoQ7fU5QqZiM7jaHbhWxod0LgQnfsauqV+AVTxWxxMtNv9swAdcPCf5Mip9X1dtwnIkYOBdf5ADZuzATV3sJ1kJvCJOH7mV+FIFqHZhX9WoazASNzMOfOrcAswXmYBHyNpF6ek2cQLNZW8Hx/jQwNLwi2A5GZ/bJ61kIDP//HG+OND1SirWUgJOMjAydzQy0ELoMK4tiBIiXfaIkaiCkOZNhKToWMKtE+GRGdsy6amFk6egooq8NYQ6GmDk1hHWLYcZQV24WQsa0UVqGQrHMxCkGLqnr+/hid3gItGQdYIuGgY9E+H7p2hQzvQYuyy8vqg8iSUlMO3xbB+J+R/CV/uBVmLylGzus0koDEUH5cDb0NAs7kyBS8b0RhuStOmAx7omQYzfgSzJ8PYYeAwSUafrIG8L+HF9+Ff66HqOJCAOS2Ccg69Tj7XgpAqiePkZTj4GDNqtxY6dISbZ8BNV0PfHkYnqHG274WnXoWXPgTdS6iNNQfKRVyOjzGsF0UqeQ4moaGZyvxLwAPZY+DRmyBnZP23lVfC/sNQVAKlx6DaHbv0CKGamR5doF9PyEiHlOTw20YOhL//Hq4YB/f8CfYWoqyBWZCAoAsa2UCRIFc68fEpGuNNIwB/J2/OVHhuIaSeMS6pdsOnW+CtNbBmGxwsA88p4rPuwB+UmdwOMtJg0kUw41LIHlG3/1FYAnMfgM82A4kxTlckKMfQCxSImwQ5cjiQB3QxOFkKf+Evng9LfgVOR/Artwde+gCefVOZWjwEO13xbm9Dhp7OZMg5HxbOhJ9kh99WUQU3PwUvv4d5RBCYJPIyQZAtZyFYgRm6LP5MXTgbnviv8Bq1qwjuXAqr8vz3mWnY5W+uXIlww0/h/vlwTqfg15Un4bqH4J3VmKM5UP2AY0jGa2hkIkySlW649gp44ubwwl9VAJfdAqvWAA7AhXkKH1RaEsCjw/OvwuTfwLZvg1+ntocXfwdjRgAxW+UXAaqZ7ITgfA3JEIOTo/DAqBHw9K2ghRTuK5/AnPuhpAxlQs1U8GcigCTY9jX87G4o+Cr4VecU+ONvoVs3VNNhNAKBZKiGpI/RaUGC0wUPL4CeIT2Rtdvgxsfg+AnMN5xqjEQoLIbrHlCjkwAXD4e75mAOAQAIMjQE3YxOBx74+eXw40uCl/YegOsfgkqrFX6ABPiuEOY/BlWngpdvvBpGDkd1YI0nXUOSaqj3T4f2qXB7SPiiLuHev0FhIaq9tyqJsLoAlv4zeKl9EvzmGhAaZphQ6qwByU3eFks8MOViyAzpiazeAm98gnmGTS3BqTyD+w8FL11zKQwbgJrQMpZEDYGj6ftiiKYyJIBPhydeBq8bc3f4mosDSo/A0pXBSynJ8LNcMIPjzVjfvw/S02DCBcFLX+1TEyuWbPcbwgFvrlFu6wCTLgRnEoY3A4YLIGsEpId0Qz/YCDUnMDplrYsTig7Auh3BS6MHwYA+GD4iMDabZXjbD/5MOpsKP4AX1ocIILW9EkHbFoAGg0K8EOWVyuV7VgpAg+37wi8NMt4DY2BWS9ASwh0/h8rg8A+Gpip2aFBcqkLKAvTqhuEdXUOz2uVS4+IAFVUq3s7oTIkVlSfVJ0DnDhj+vxoqAIEKsgjgM8GwKGYI8HihNmTs7zR2AA6cncbWJgJsAbRxbAG0cWwBtHFsAbRxbAG0cWwBtHFsAbRxbAG0caw9665jhqiaIALLhbBZVwBeGDUUZk4C3QQuZE1AaYWK/KmpwXAff3OxrgB8KpTsjllGJyTIlj3wh9eNTkVkWLMPIEEkwhhzLGk5zbfF4K3FMrUfrCoAXYWRXTDQ6ISE890hDI/wiRRrCsAHw/uFB5OYgaIWH+EUf6wpAB0uGBQeS2AGio5gKfMPVhWAAy4canQiwql2w4FSLJejFksuoEO7DjCyv9EJCedYpdo5zGo5arHkArraFq5fmtEJCefwD3CiGrsJiDk6jBkMySZbN/j9EfBYyAEUwHoCQK0mMhv7DmGKtX6RYi0BSHAl111NZAa+KcbwdX7RYC0B6NCzq+oDmI3Cw1jO/IPV5gJ8cF4GdEmN7DEp4VQtMamhQqjOX2EJGLzQPiqsJQAJowdH/tj6nbDgUZAxsHcC8Pj8FsAWQIxx+FfURsj6HbDja2K744i1cvI01km2Dp06RTcB9MU3qP/UOv9t3LBOJ9AHIzIi7wCerFG7jljRPMcD69QJn2r/I11QufcA7DtIUAASNV73UbdT6N8I+vSnDWAdAWjRBYBs3g3VlQT2x8WRDH3TlSVJ7xZcnu72qO3mi0vV9vMnjqOE4uKsFoM1BCAhoR2MHBD5owXbQXNA1miYNl5t6z6krxpK1jedXF2jhnSf74GPNsOHG+DoUcx9FEwLsIYAfNC7FwzsFdljtR44pzOsehqmjG3eETPtklSwyfB+MGeKivL507vwwko4XoE5dvtuRayhaV05gFLbR/aY0wGPLIArL4n+fKH+6fDojZD/PEzNRe32bUGXb0NYQwCoQ6IiRdNa72CpEf3h9Qfg9rlY89zABjC/ACRoiTDOBDOAyYnqIIv7bgARj+Np4oD5BaCrMwGH9zM6IUHumwe3/gJzHP7QQiwhgMF9oEdnoxMSRAh44AaYMBbLi8ASAsgcGvsTQSMltT08dSu0T8GSgSABTJat9aBFNwEUDzKHwIzLMNcC1QgxtwB0SE6JzgEUL26ZrtJoVStgegEM6q36AGYlcyjkjsayVsDcAvC1bgTwKTf8UKm2pJWtNITTBFw6BssOCc3tChatswLo483qxNEvvoGySnA5lFv5F5fB/J9AQgtzYdx5ylehq3N5LYWhApAyfHMHp0MNsU7XThc8/RqsWgfn9lBu2T7d4dyekN5VHeLcLqneVwNwtAJuewbe+tQfs+/gdAEdOAhrNsH76+CFO6D3OdH/Hxlp0KUTlJXTsAAkJCZAUshcgtsEJ4cZKoBaD5wIOVKtS6o6nbvyBP6dpGFfMewrJGhiNRAJ0K2j8g30S1MFkJEO/dOg1znq4/XBgsfh32uAJOqGgznUO9//FP47CV5ZEv3mzV1S4ZyOUFZGw42qVLuDh85nHDuB4U2HcQIQIGv9Cyr99OmuPjuPE8xIB3WieaQOR8vhaBns2EMwEx3gSoKO7SHBBYdKaPxMNKG+f3M1zLwcpudG968kuJQgGy1MXQk0tLkpKmnimThg+JExu4uCf6Ykq0mXJjdZCETuOFHTs4n+jxM8Hig7BoeO0Dx5C8ALr6yOIv1+nA5/U9RYYUoYdYY/Y1cRhvcZjBWAUBE7oT3y0BPEon0nGpHFADpgxz4VDBINUjZRkSVoSZAzMnjpaAV8uRfDYxWNFYADNn3t31rFz5SxkNqZ+DpWhBoa1kTp1/fpTZx04oXzBoQvadu8C4pNsJbAcAGUl8EnW4KXBvSCqdnE/WxdhxZ+ankkuD3ww3EaHQHMmRw+YvlgI0gTjAI0jD7GWKj2N/S4mDtnQ0on4mcF/FPOjQ0pG+NYJZSFdlxD8cDgATB/avBS6TF4Ow/Daz+oJFcbmgIXrNsWbgVGDoCbpxO/qVZdOZwSotzls7AEjtVnAaQ6JPqe68PXM/75XSg+iPFuOEm1hqTS0J6oAI8bHlmhDlUKcMdsyLqQ2IvAv+R89uToX/HVd+Cr76xjN8ybpoaYAY6UwwvvYHTjqxD8oCEobfrOGJMAazfDSx8GL3XpAC8uhnN7E1sR1MDPJ0Y/+vD64JPN1C38Gsi9GJ66JTwu8aHlcOAApjD/wEEN+N7oVAAgYMlfVG0KMLg3/GMJZPQF3DH4TS+MGQlP3BT5lnPllaodv2oRvJtPcJNoCdTA+LFKwB1Tgs+8tRb+/DbmCS0XfCfIlg+isdhojxQAbhg3Bj74n3CX6c79MP8R2LgVlXmtYT516NoRlt4O5/dXNbnR23Xlut13CDbsgLXbYO/3KKeVi9MOJSRcMwmeXwRdQ9r9PcUw6df+oZ/Rbb9CRzBdkCVnoPE65miVoBamXw4v/i5cBBVV8PBytUDjRAWtIgSXExJdTRc+KGeP24MaM+kEXdQCJQIP9O0Nd8yBBT8Nn1fYfxiuvgu278YctV8tkyvFS7ZgrMzARQEaaaawAgBumHklPLew7m4gG3bCM6+pcfTxCv/FQEEEPs0l0tDuwLsDC0x1dS29J8zIhVuvUQEsoewugl89DOu3Etv9CSJBA3zkUcNEAVKQw/to/NhUYU1uuGQ0/H2xWst3Jt8Uw0eb4N8bVBNxtMLvyo3x/yCcas6iR2cVq3hVFkweC2ld6977f1th3oNQdABz1PwAGqDzJPlikdJ0trwbBw+bSgAAtdAnHX4/D+ZdqUx2fZRXqpPHK06C1xu7PYSlf06/SwdV4A0tVauoUnEMz7wKlVWYpc0PIgCdaRSIVSqrxsuxSEL7subBCwi4KhvumgPZ55tvk+gAp9zKIj28HD7fgTlXFKv2/xA+RrNelKqsHCgT6cFaHFxsOisAqs31KIdN9vnKaTPlYhU7YAZ27of31sFrq2HrHoIjAzOizP8y8sWNENplypG3ofEHUwoggF8IaJDWXblvM4fCsHPVZg8d2imnS6z6soEdwY5Xqa1hd+6HLbvhiz1Qccx/gxPD5/gbReDBx0TWiTz1Z4DxMg3JNgTdTTMaaAwfwW1e/MEhSYlqRi+WAvDqUOsO+f1AYIrZTH19qNq/gVNM4HPhgdDuSZ44TLZcgcZCSwjgzFAxCTVuYh9iFRhqujCvmW8MwV8ChQ9n6lawDJ1SU5uwhggUjBbjT6S+BrOgav8WfLx+5uUg+eIbdJZZ8h+0aRy1ZuFR1okToZfrtlw+lqLznS2CswhV+z+imnfr+yqcjeIIsATLLne0CUM5fY6jcXdo2x+g/r5rPiuQrDDJnLVNS1B9lgfJE1/U93UDgxchcbAYH19ZYnhjUz/K9K/Ew9KGbmm8pZ8gxyH5EOhgiaGhTRBV+PvwkssGcbCx2xrmM7EenVuQuO1OoYVQ7f5hYG5jhQ/N8V8ViOXAvagIEhuzoyZ7qpAsIF8UNHV781r4fPE4cNfpH7AxJ6rwTyK5jgKxqjmPNL+LlyeeQGcRkmpbBCZEleQhdGZRIFY297HIizJbzkLjOQSdbU+BSVAdvm8RXE+eWBfpo5FRIF7Gx2R0Ntl+AoMJzH3o/BPBxEgLH6KdxFwntpDANHSeBWptX4EBaICkAp27cDCbPFEczWta3ppnyWlo3I/GqIijbG0iRxU86HyAg3v5TGxuyetapzuXKTuSxC8R/BqNQbYQYkCw4DcieJJTvFOfbz9SWrc/f4nshZNfAnMRDAuc02OLIUoCsQc6PmAjkr8ieePMKd2W/kTrkytT8DIJwUxgIhpdgKAQbEHUT2iwiao4B4H3kLyKk3zWilbfjzT2I/rxMgPJJUAukjEIBgKdELY3IQyJDygD9gCb0fkMF5tYK0pi+bPxLYRcmYSP/sBIJEOB/kA6go6o3fzaAgKJjtqY4xhwAMl+BLuQbKcXhbwhmrFasXX4f1x3XvPGhuAYAAAAAElFTkSuQmCC';
+  var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  var d; try { d = JSON.parse(document.getElementById('report-data').textContent); } catch (e) { d = null; }
+  var page = document.getElementById('page');
+  // The currency, period and tone tables come inside the data, from the signed shape, so they have 1 home (framework/research/shape.json).
+  var disp = d && typeof d === 'object' && d.display && typeof d.display === 'object' ? d.display : {};
+  function table(v) { return v && typeof v === 'object' && !Array.isArray(v) ? v : {}; }
+  var CUR = table(disp.currencies), PER = table(disp.periods), TONE = table(disp.tones);
+  function el(tag, cls, text) { var x = document.createElement(tag); if (cls) x.className = cls; if (text !== undefined && text !== null) x.textContent = String(text); return x; }
+  function add(p) { for (var i = 1; i < arguments.length; i++) if (arguments[i]) p.appendChild(arguments[i]); return p; }
+  function s(v) { return typeof v === 'string' ? v : ''; }
+  function arr(v) { return Array.isArray(v) ? v : []; }
+  function link(url, text) { url = s(url); if (!/^https?:\/\//i.test(url)) return el('span', '', text); var a = el('a', '', text); a.href = url; a.rel = 'noopener noreferrer'; a.target = '_blank'; return a; }
+  function host(url) { try { return new URL(url).hostname.replace(/^www\./, ''); } catch (e) { return ''; } }
+  function icon(cls) { var i = el('img', cls); i.src = ICON; i.alt = ''; return i; }
+  function money(x, c) { var sym = typeof CUR[c] === 'string' ? CUR[c] : ''; var n = Number(x).toLocaleString('en-US'); return sym ? sym + n : c + ' ' + n; }
+  function price(p) {
+    if (!p || typeof p !== 'object' || typeof p.low !== 'number' || !/^[A-Z]{3}$/.test(s(p.currency)) || !s(p.period)) return null;
+    if (p.low === 0 && !p.high) return 'Free';
+    var per = typeof PER[p.period] === 'string' ? (PER[p.period] ? ' ' + PER[p.period] : '') : ' a ' + p.period;
+    return (p.low === 0 ? 'Free, then up to ' + money(p.high, p.currency) : p.high ? money(p.low, p.currency) + ' to ' + money(p.high, p.currency) : money(p.low, p.currency)) + per;
+  }
+  function day(iso) { var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s(iso)); return m ? Number(m[3]) + ' ' + MONTHS[Number(m[2]) - 1] + ' ' + m[1] : ''; }
+  function unv(x) { return x && x.unverified ? el('span', 'none', ' (unverified)') : null; }
+  function card(title) { var c = el('div', 'card'); if (title) c.appendChild(el('h2', '', title)); return c; }
+  function tone(v) { var t = TONE[s(v)]; return t === 'up' || t === 'mid' || t === 'down' ? t : ''; }
+  function row(label, value, tone) { return add(el('div', 'row'), el('span', 'label', label), el('span', 'v' + (tone ? ' ' + tone : '') + (String(value).length <= 12 && String(value).indexOf(' ') < 0 ? ' short-v' : ''), value)); }
+
+  var save = el('button', 'save', 'Save as PDF'); save.type = 'button'; save.addEventListener('click', function () { window.print(); });
+  add(page, add(el('div', 'mast'), icon(), el('span', '', '5 Day Sprint'), el('span', 'grow'), save));
+  if (!d || typeof d !== 'object') { add(page, el('h1', '', 'Market research'), el('p', 'lede', 'This page is the template. A report fills it in.')); return; }
+
+  document.title = 'Market research: ' + (s(d.idea) || s(d.title));
+  add(page, el('p', 'eyebrow', 'Market research' + (day(d.date) ? ', ' + day(d.date) : '')), el('h1', '', s(d.title) || 'Market research'), s(d.lede) ? el('p', 'lede', d.lede) : null);
+  var grid = el('div', 'grid'), main = el('main');
+  add(page, add(grid, main));
+
+  add(main, add(card(), el('div', 'label', 'The short answer'), el('p', 'answer', s(d.verdict) || 'Not found'), s(d.why) ? el('p', '', d.why) : null));
+  if (s(d.opening)) add(main, add(card(), el('div', 'label', 'Your opening'), el('p', 'answer', d.opening)));
+
+  var comps = arr(d.competitors), cc = card('Who else does this'); cc.className += ' long';
+  if (!comps.length) add(cc, el('p', '', 'No one doing this was found. That can mean an open market, or that people solve it another way.'));
+  else {
+    var list = el('div', 'comp');
+    comps.forEach(function (c) {
+      var nm = el('div', 'nm', s(c.name));
+      if (s(c.url)) add(nm, add(el('small'), link(c.url, host(c.url))));
+      if (c.closest) add(nm, el('span', 'tag', 'Closest to you'));
+      var pr = price(c.price), right = el('div');
+      add(right, s(c.what) ? el('div', 'what', c.what) : null, pr ? add(el('div', 'price', pr), unv(c)) : el('div', 'price none', 'Price not found'), s(c.note) ? add(el('div', 'short', c.note), pr ? null : unv(c)) : (pr ? null : unv(c)));
+      add(list, add(el('div', 'co'), nm, right));
+    });
+    add(cc, list);
+  }
+  add(main, cc);
+
+  var figs = arr(d.figures), mc = card('The money'), fw = el('div', 'figs');
+  if (!figs.length) add(fw, add(el('div', 'fig'), el('div', 'n none', 'Not found'), el('p', '', 'No figures were found for this market.')));
+  figs.forEach(function (f) { var nf = s(f.value) === 'Not found'; add(fw, add(el('div', 'fig'), el('div', 'n' + (nf ? ' none' : ''), s(f.value)), add(el('p', '', s(f.what)), unv(f)))); });
+  add(main, add(mc, fw));
+
+  var sigs = arr(d.signals), sc = card('Signs people want it'), ul = el('ul', 'sig'); sc.className += ' long';
+  sigs.forEach(function (x) { add(ul, add(el('li', '', s(x.text)), unv(x))); });
+  if (s(d.demand_note) || !sigs.length) add(ul, el('li', 'none', s(d.demand_note) || 'Demand evidence not found'));
+  add(main, add(sc, ul));
+
+  function points(title, items) { var c = card(title), ol = el('ol', 'pts'); arr(items).forEach(function (h) { add(ol, add(el('li'), add(el('div'), el('span', '', s(h.title)), document.createTextNode(s(h.text))))); }); if (!arr(items).length) add(ol, el('li', 'none', 'Not found')); return add(c, ol); }
+  add(main, add(el('div', 'two'), points('What looks hard', d.hard), points('What to find out next', d.next)));
+
+  var nfl = arr(d.not_found);
+  if (nfl.length) { var nc = card('Searched for and not found'), nl = el('ul', 'sig'); nfl.forEach(function (x) { add(nl, el('li', '', s(x))); }); add(main, add(nc, nl)); }
+
+  var srcs = arr(d.sources), src = card('Sources'), ol = el('ol', 'src');
+  srcs.forEach(function (x) { add(ol, add(el('li'), link(x.url, s(x.title) || host(x.url)))); });
+  if (!srcs.length) add(src, el('p', 'none', 'No sources came back.')); else add(src, ol);
+  add(main, src);
+
+  var lv = d.levels || {}, facts = d.facts || {};
+  var aside = el('aside', 'card facts');
+  add(aside, row('Competition', s(lv.competition) || 'Not found', tone(lv.competition)), row('Proof people want it', s(lv.demand) || 'Not found', tone(lv.demand)),
+    row('What people pay', s(d.pay) || 'Not found'), row('Timing', s(lv.timing) || 'Not found', tone(lv.timing)), row('Competitors found', String(comps.length)),
+    s(d.where_label) ? row('Where', d.where_label) : null, s(d.for_label) ? row('For', d.for_label) : null, row('Sources', String(srcs.length)),
+    el('div', 'note', (Number(facts.found) || 0) + ' facts found with a source. ' + (Number(facts.not_found) || 0) + ' things searched for and not found.'));
+  add(grid, aside);
+
+  var foot = add(el('div', 'foot'), icon(), document.createTextNode('Made with the '), link('https://www.skool.com/5-day-sprint', '5 Day Sprint'), document.createTextNode(' framework. Saved in your project at .5ds/research/'));
+  add(page, foot);
+})();
+</script>
+</body>
+</html>
