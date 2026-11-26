@@ -15,3 +15,4 @@ This is the list of what lives where. Add 1 line when you create something that 
 
 ## Where the data comes from
 List each place this project gets numbers from, and what it tells you. For a website, PostHog is the default for what visitors do.
+- `core/allergens.mjs`: allergen matrix logic (14 EU allergens; an unrecorded ingredient is unknown, never safe). Tests in `core/allergens.test.mjs`, run with `node --test core/`.
