@@ -1,0 +1,215 @@
+{
+  "checked": "2026-11-17",
+  "how": "node .5ds/taste/sources.mjs fetches these pages, reads the date at each page's 'near' words (the newest date in the page when there are none), and writes 1 line per platform to .5ds/taste/notes.md. A page newer than the platform's checked date wins over the guide: read the element named in 'read' and note the new rule.",
+  "platforms": {
+    "web": {
+      "guide": ".5ds/taste/web.md",
+      "checked": "2026-11-17",
+      "pages": [
+        {
+          "url": "https://web.dev/articles/vitals",
+          "near": "Last updated",
+          "read": "the Core Web Vitals thresholds table (LCP, INP, CLS)",
+          "date": "2024-10-31"
+        },
+        {
+          "url": "https://www.w3.org/TR/WCAG22/",
+          "near": "W3C Recommendation",
+          "read": "success criteria 1.4.3 Contrast (Minimum), 1.4.11 Non-text Contrast and 2.5.8 Target Size (Minimum)",
+          "date": "2024-12-12"
+        },
+        {
+          "url": "https://web.dev/learn/design/typography",
+          "near": "Last updated",
+          "read": "the sections on fluid type with clamp() and on line length",
+          "date": null
+        },
+        {
+          "url": "https://ui.shadcn.com/docs/changelog",
+          "read": "the newest entry: any change to the init command, its flags or the theme variables",
+          "date": "2024-10-19"
+        }
+      ]
+    },
+    "ios": {
+      "guide": ".5ds/taste/ios.md",
+      "checked": "2026-11-17",
+      "pages": [
+        {
+          "url": "https://developer.apple.com/design/human-interface-guidelines/materials.md",
+          "near": "Change log",
+          "read": "the Change log table, and the Liquid Glass guidance (regular and clear, never in the content layer)",
+          "date": "2025-09-09"
+        },
+        {
+          "url": "https://developer.apple.com/design/human-interface-guidelines/layout.md",
+          "near": "Change log",
+          "read": "the Change log table, and the Liquid Glass and scroll edge effect guidance",
+          "date": "2026-09-09"
+        },
+        {
+          "url": "https://developer.apple.com/design/human-interface-guidelines/typography.md",
+          "near": "Change log",
+          "read": "the Change log table, and the Dynamic Type sizes table for iOS",
+          "date": "2025-12-16"
+        },
+        {
+          "url": "https://developer.apple.com/design/human-interface-guidelines/tab-bars.md",
+          "near": "Change log",
+          "read": "the Change log table, and the iOS tab bar guidance",
+          "date": "2026-06-08"
+        },
+        {
+          "url": "https://developer.apple.com/design/human-interface-guidelines/accessibility.md",
+          "near": "Change log",
+          "read": "the Change log table, and the control size and contrast tables",
+          "date": "2025-06-09"
+        }
+      ]
+    },
+    "macos": {
+      "guide": ".5ds/taste/macos.md",
+      "checked": "2026-11-17",
+      "pages": [
+        {
+          "url": "https://developer.apple.com/design/human-interface-guidelines/designing-for-macos.md",
+          "near": "Change log",
+          "read": "the Change log table at the end, and the touch input guidance",
+          "date": "2026-10-28"
+        },
+        {
+          "url": "https://developer.apple.com/design/human-interface-guidelines/the-menu-bar.md",
+          "near": "Change log",
+          "read": "the Change log table, and the list of standard menus",
+          "date": "2025-06-09"
+        },
+        {
+          "url": "https://developer.apple.com/design/human-interface-guidelines/windows.md",
+          "near": "Change log",
+          "read": "the Change log table, and the macOS window guidance",
+          "date": "2025-06-09"
+        }
+      ]
+    },
+    "android": {
+      "guide": ".5ds/taste/android.md",
+      "checked": "2026-11-17",
+      "pages": [
+        {
+          "url": "https://developer.android.com/develop/ui/views/layout/edge-to-edge",
+          "near": "Last updated",
+          "read": "the edge to edge rules for the target SDK",
+          "date": "2026-11-10"
+        },
+        {
+          "url": "https://developer.android.com/guide/topics/ui/accessibility/apps",
+          "near": "Last updated",
+          "read": "the touch target size and contrast rules",
+          "date": "2026-11-10"
+        },
+        {
+          "url": "https://developer.android.com/develop/ui/compose/layouts/adaptive/use-window-size-classes",
+          "near": "Last updated",
+          "read": "the window size class breakpoints",
+          "date": "2026-11-10"
+        },
+        {
+          "url": "https://developer.android.com/google/play/requirements/target-sdk",
+          "near": "Last updated",
+          "read": "the target API level Google Play requires and its date",
+          "date": "2026-10-28"
+        }
+      ]
+    },
+    "cross-platform": {
+      "guide": ".5ds/taste/cross-platform.md",
+      "checked": "2026-11-17",
+      "pages": [
+        {
+          "url": "https://expo.dev/changelog",
+          "read": "the newest SDK post: its React Native version and what it calls stable, alpha or beta",
+          "date": "2026-11-10"
+        },
+        {
+          "url": "https://docs.expo.dev/versions/latest/sdk/ui/",
+          "read": "whether Expo UI is marked alpha or beta",
+          "date": null
+        },
+        {
+          "url": "https://docs.flutter.dev/release/release-notes",
+          "near": "updated on",
+          "read": "the newest stable release and the material_ui and cupertino_ui notes",
+          "date": "2026-11-11"
+        }
+      ]
+    }
+  },
+  "facts": [
+    {
+      "fact": "shadcn 4.23.0 is the version the guide pins",
+      "page": "https://registry.npmjs.org/shadcn",
+      "date": "2026-10-27",
+      "how": "its time field for 4.23.0"
+    },
+    {
+      "fact": "npx shadcn@4.23.0 init -t next -d -y -n web makes a Next.js app in web, with web/app/globals.css, web/app/layout.tsx and web/.git, and asks nothing",
+      "page": "https://ui.shadcn.com/docs/cli",
+      "date": "2026-11-17",
+      "how": "init --help read, and a real run on 2026-11-17 checked by framework/tests/test_design_look.mjs"
+    },
+    {
+      "fact": "iOS 27, iPadOS 27 and macOS 27 were released on 14 September 2026",
+      "page": "https://images.apple.com/hu/newsroom/2026/09/major-updates-for-apples-software-platforms-are-now-available/",
+      "date": "2026-09-14"
+    },
+    {
+      "fact": "iOS 27.2 lets people set Liquid Glass from ultra clear to fully tinted",
+      "page": "https://support.apple.com/en-mide/149076",
+      "date": "2026-10-26"
+    },
+    {
+      "fact": "Macs with touch displays: touch is for brief, intentional interactions",
+      "page": "https://developer.apple.com/design/human-interface-guidelines/designing-for-macos.md",
+      "date": "2026-10-28",
+      "how": "its Change log row"
+    },
+    {
+      "fact": "Google Play requires new apps and updates to target API 36",
+      "page": "https://developer.android.com/google/play/requirements/target-sdk",
+      "date": "2026-08-31"
+    },
+    {
+      "fact": "Expo SDK 58 is built for iOS 27 and includes React Native 0.88",
+      "page": "https://expo.dev/changelog/sdk-58",
+      "date": "2026-10-15"
+    },
+    {
+      "fact": "Apps built with the iOS 27 SDK get resizable scenes; requireFullScreen no longer opts out",
+      "page": "https://expo.dev/changelog/sdk-58",
+      "date": "2026-10-15"
+    },
+    {
+      "fact": "Expo UI carried no alpha or beta badge in the Expo docs, while Expo Router's Experimental Stack and Split View were marked alpha",
+      "page": "https://docs.expo.dev/versions/latest/sdk/ui/",
+      "date": "2026-11-17",
+      "how": "the docs sidebar, read on 2026-11-17"
+    },
+    {
+      "fact": "Flutter 3.50.0 is stable; Material and Cupertino moved to the material_ui and cupertino_ui packages",
+      "page": "https://docs.flutter.dev/release/release-notes",
+      "date": "2026-11-11"
+    },
+    {
+      "fact": "Playwright 1.65.1, pinned by shots.mjs, has the screenshot command with --viewport-size and --color-scheme",
+      "page": "https://registry.npmjs.org/playwright",
+      "date": "2026-11-13",
+      "how": "its time field for 1.65.1, and screenshot --help read on 2026-11-17"
+    },
+    {
+      "fact": "Material 3 Expressive layout scaffold and 8dp spacing system, I/O 2026",
+      "page": "https://m3.material.io/blog/whats-new-at-io26",
+      "date": "2026-05-19",
+      "how": "the post's date"
+    }
+  ]
+}

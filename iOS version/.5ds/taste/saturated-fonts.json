@@ -1,0 +1,61 @@
+{
+  "checked": "2026-11-17",
+  "note": "Faces that need a reason from the concept, written in .5ds/taste/art-direction.md next to the face name. look.mjs reads this file; type-and-colour.md quotes it. Refresh the most_used list every 90 days from its source.",
+  "most_used": {
+    "source": "https://fonts.google.com/metadata/fonts",
+    "read": "2026-11-17",
+    "how": "the popularity field (the order of the Google Fonts Most popular sort): the 30 lowest values, ties in alphabetical order",
+    "fonts": [
+      "Lato",
+      "Noto Sans JP",
+      "Poppins",
+      "Roboto",
+      "Ubuntu",
+      "Fraunces",
+      "Kanit",
+      "Open Sans",
+      "Outfit",
+      "Playfair Display",
+      "Prompt",
+      "Asap Condensed",
+      "Bebas Neue",
+      "Google Sans",
+      "Instrument Serif",
+      "Basic",
+      "EB Garamond",
+      "Epilogue",
+      "Inter",
+      "Nunito Sans",
+      "Changa One",
+      "Figtree",
+      "IBM Plex Sans",
+      "Montserrat",
+      "Sekuya",
+      "Archivo",
+      "Convergence",
+      "Plus Jakarta Sans",
+      "Press Start 2P",
+      "Fjalla One"
+    ]
+  },
+  "ai_saturated": {
+    "source": [
+      "https://github.com/Nutlope/hallmark",
+      "https://impeccable.style"
+    ],
+    "read": "2026-11-17",
+    "how": "faces those 2 sources list as overused in AI-made sites",
+    "fonts": [
+      "Playfair Display",
+      "Fraunces",
+      "Instrument Serif",
+      "Space Grotesk",
+      "Geist",
+      "Cormorant",
+      "DM Serif Display",
+      "DM Sans",
+      "Plus Jakarta Sans",
+      "Inter"
+    ]
+  }
+}

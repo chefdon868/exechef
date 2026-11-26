@@ -1,0 +1,122 @@
+{
+ "v": 1,
+ "install_id": "7d24ca42f601eda96a",
+ "done": true,
+ "components": {
+  "skeleton": {
+   "version": "d50714ee",
+   "files": {
+    ".5ds/README.md": "964f825db12e61255d98695da28675f064e347ae5f2ca0dbda843afc88361b91",
+    ".5ds/rules.md": "54df262b8fb74ac6bbf5265a3ae60e7115b1c24ec8d96ba7c24d5d481bb58be6",
+    ".5ds/schema.md": "69ef499d58689e5dc42418366f7384060db92c3213bba0f450aa34b8aee998a9"
+   },
+   "member": [
+    ".5ds/schema.md"
+   ],
+   "label": "The 5 Day Sprint Framework"
+  },
+  "charter": {
+   "version": "36263c54",
+   "files": {
+    ".5ds/charter/instructions.md": "f455571b80a5f07913467db67000dae5443bc3005670f31e0bcd0e1856b41d31",
+    "charter.md": "4d489b0cdf270ec70b5ad9b0cfd4de5a1df425d419c7cd08244e1a59be141f94"
+   },
+   "member": [
+    "charter.md"
+   ],
+   "label": "The Charter"
+  },
+  "schema": {
+   "version": "e7d89172",
+   "files": {
+    ".5ds/schema/env-names.cjs": "fadc70c352756283074125a7b07963055a61bb3ef5db5fed48aa722f81fa76fb",
+    ".5ds/schema/instructions.md": "a6f29f463187242babfcdfa1f1655f5bb2eae1fc2ba532b30b36bf526eae2216"
+   },
+   "member": [],
+   "label": "Schema"
+  },
+  "taste": {
+   "version": "812608a1",
+   "files": {
+    ".5ds/taste/android.md": "098ef9ab4f1f3f61f18958b400d5faf9a9ba4b61cc17aff3790970ced6a75b05",
+    ".5ds/taste/art-direction.md": "942a49c8966bccef72c68ec6db0464a6bbacd5416cdf4a36d631b80c56fd8877",
+    ".5ds/taste/checklist.md": "f4aaf5c5e2cb6d406a889c610b9652246e0f9f949fdefaa0805165b4e42f4d52",
+    ".5ds/taste/craft.md": "20af61110396238b36657db8e1313709d178c1cfbfb87fc5ce878aeff5608edb",
+    ".5ds/taste/cross-platform.md": "cbc219ca8709c64b81b2bcfb4fffaca933db545cde8c0af7542589b8169b46a6",
+    ".5ds/taste/inspiration.md": "be7f3718a2bb9abe769e45186b3dbbc4d2a4b1d25fb6c079ca1f4d374f2cea0d",
+    ".5ds/taste/instructions.md": "3aecb364253902ea0c856bbb42ac2c7a058224a131f65b8f3704f04393a0a2e9",
+    ".5ds/taste/ios.md": "f9ed63e66ced3eca02a1155d074af0b7397322ec9dc331bffcd77287825ce1c7",
+    ".5ds/taste/layouts.md": "3cc24bd4b330a1facba50d77e3fa8828ad34bdbedb4f9f1517e99a7a3f3ab082",
+    ".5ds/taste/look.mjs": "36f878499ae06e3c41e84ae6c14a5252bc52da732184e899d7e2b6f321038fe0",
+    ".5ds/taste/macos.md": "3cc87d422e4e048a1800ceed18e15a20ded9d8270f4421e5f3b1141f3e801d9e",
+    ".5ds/taste/notes.md": "b7ffa5940ad50e6703b6dd604ac6550898108926708dc7c2bd3414b356b234af",
+    ".5ds/taste/notice.md": "c2ba23e9dadfe9e846b0f089ee186cfc9384b88aaec74fff9dbe2d6aa628dc3f",
+    ".5ds/taste/numbers.json": "fe24e49b135a943e62782d8dea124af3d4b25f835a8e3ceb3e97a0fde27fdf46",
+    ".5ds/taste/palette.md": "7729c6639d917044980dd62c8a3feafe9759827a35847f491f75c12d919776e8",
+    ".5ds/taste/palette.mjs": "abcf523bf82557e961f95881f1a63574d3fa1eda9c656edcf3019913fd263aef",
+    ".5ds/taste/saturated-fonts.json": "a73c41b57ce3b785ed3ce1500726829809e2372e2e7dfcc4bf10a991b24a6031",
+    ".5ds/taste/seen.json": "fff72d43a54cf1a9da8b72124cea39989dceb70279df4844e1c012ad98b82722",
+    ".5ds/taste/shots.mjs": "d0fe21880069dd2b0c6127b4921b17a180439fe7b162f5c775faa0b5219fbf73",
+    ".5ds/taste/sources.json": "7110b82d781eda0377a0ac6416a291af146d4a94b3e6203cd54b83fa5ba92553",
+    ".5ds/taste/sources.mjs": "ac8c1a153651d4e5dfe067a5699729b64406c9a3cea2277cc584e57908c5cfb1",
+    ".5ds/taste/type-and-colour.md": "2858377e8a25b6020063ae948d75cf8f6081ea6cc4d41c0d4797d4a73c4e7d47",
+    ".5ds/taste/web.md": "1e2dd9b5cc9a609342c9e9d7f6bd9fbd3d8671c3d06284195ba3bc521e95053f"
+   },
+   "member": [
+    ".5ds/taste/art-direction.md",
+    ".5ds/taste/notes.md",
+    ".5ds/taste/palette.md"
+   ],
+   "label": "Taste"
+  },
+  "animations": {
+   "version": "85ebaf7c",
+   "files": {
+    ".5ds/animations/animations.mjs": "9ac80466e0f11ac449f5027ecec8a7a0d819a64488bb29f1aa2e24dfbcb6eca2",
+    ".5ds/animations/checklist.md": "e0b8f623f3c1de97f2dee65425bd6c284ededa395289ccc6acd4a2c3ec4a5944",
+    ".5ds/animations/instructions.md": "cbcb396504d85fed42d4d121848276626e3945dd1263d6bcd5f821726872853f",
+    ".5ds/animations/motion.md": "6eb35c197655dd9a839f37d147323b06d215454e09bcddd8c4ea2e7c97e04010",
+    ".5ds/animations/numbers.json": "60082c5a79c911b2d2b224b498b9a9b39c4738488bdd8c59f00fcd6dc75fd90f",
+    ".5ds/animations/patterns.md": "18d781ee353a93c89d18e2d123b3109080dc5128e9dddb4302f7267eb738cbb2",
+    ".5ds/animations/sources.json": "d766fe070499aa78009534dc36980ff29c7f7e6750a945aef4985c48ea8ccdbc"
+   },
+   "member": [],
+   "label": "Animations"
+  },
+  "security": {
+   "version": "a94aa9eb",
+   "files": {
+    ".5ds/security/check.mjs": "367131c365f7dfa17efcf2f2ed26a1aab4567f51feb3ee940557b012a5398de9",
+    ".5ds/security/instructions.md": "7d00554de633a797276d524f9526066f09154137538a27b9f0acf07db4c89930",
+    ".5ds/security/known-ok.md": "da2878e0b9e769bf203e7b1e793ee9c7885bb4dffc997d4abce0e65d86b53eba"
+   },
+   "member": [
+    ".5ds/security/known-ok.md"
+   ],
+   "label": "Security"
+  }
+ },
+ "extras": [
+  {
+   "path": ".gitignore",
+   "created": true,
+   "hash": "86693a425bec5f21baf5a6f19d3f7ee581e3c80d1be640c06f5f59dbd3bc8382"
+  },
+  {
+   "path": ".env.example",
+   "created": true,
+   "hash": "a16d47348ee4fde4b18fc769e8844c9931a329340fe8c77fcb475a4b198ba509"
+  }
+ ],
+ "created": [],
+ "claude": {
+  "created": true,
+  "text": "Read .5ds/rules.md first. It holds how this project works.\n"
+ },
+ "settings": {
+  "created": true,
+  "dirCreated": true,
+  "after": "6dfb4776bcc01ae54596c59f5fdccbd2eafc9862785ad1f8f7a961fab6bf1c3c"
+ },
+ "brief_shown": true
+}

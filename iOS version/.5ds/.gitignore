@@ -1,0 +1,7 @@
+state.json
+news.json
+backups/
+updates/
+*.tmp
+handover/next.md
+handover/last.md

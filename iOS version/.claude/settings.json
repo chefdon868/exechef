@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"try{require(require('path').join(process.env.CLAUDE_PROJECT_DIR||'.','.5ds','hook.cjs'))}catch(e){}\" 2>/dev/null || true"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "checked": "2026-11-17",
+  "how": "The Taste part's sources check reads these too (node .5ds/taste/sources.mjs motion). A page newer than the checked date wins over motion.md: read the element named in 'read' and note the new rule in .5ds/taste/notes.md.",
+  "platforms": {
+    "motion": {
+      "guide": ".5ds/animations/motion.md",
+      "checked": "2026-11-17",
+      "pages": [
+        { "url": "https://developer.apple.com/design/human-interface-guidelines/motion.md", "near": "Change log", "read": "the Change log table, and the guidance on brief, purposeful motion", "date": "2025-09-09" },
+        { "url": "https://developer.apple.com/design/human-interface-guidelines/accessibility.md", "near": "Change log", "read": "the Change log table, and the Reduce Motion list", "date": "2025-06-09" },
+        { "url": "https://developer.android.com/develop/ui/compose/animation/introduction", "near": "Last updated", "read": "the animation APIs and spring defaults for Compose", "date": "2024-07-01" },
+        { "url": "https://web.dev/articles/prefers-reduced-motion", "near": "Last updated", "read": "what to remove or replace when prefers-reduced-motion is reduce", "date": "2019-03-11" },
+        { "url": "https://motion.dev/docs/react-accessibility", "read": "MotionConfig reducedMotion and useReducedMotion", "date": null }
+      ]
+    }
+  }
+}

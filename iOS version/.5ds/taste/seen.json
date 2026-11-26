@@ -1,0 +1,51 @@
+{
+  "checked": "2026-11-18",
+  "note": "Looks seen everywhere in AI-made sites, as fingerprints: an end check for lazy defaults, never a ban. look.mjs flags an art direction that matches every axis of 1 of them until its Close to a seen look line names it and says why it is a choice here. Sources: the habits in notice.md (Anthropic's frontend-design skill, Hallmark, Impeccable). Omar's craft (craft.md) is never a seen look; only colour fingerprints live here.",
+  "looks": [
+    {
+      "name": "cream, serif and terracotta",
+      "canvas": {
+        "mode": "light",
+        "hue": [
+          50,
+          105
+        ],
+        "chroma_max": 0.05
+      },
+      "heading_kind": "serif",
+      "action_hue": [
+        15,
+        60
+      ]
+    },
+    {
+      "name": "purple gradient and Inter",
+      "action_hue": [
+        265,
+        325
+      ],
+      "face": "Inter"
+    },
+    {
+      "name": "dark, neon and mono",
+      "canvas": {
+        "mode": "dark"
+      },
+      "action": {
+        "lightness_min": 0.7,
+        "chroma_min": 0.14
+      },
+      "any_kind": "mono"
+    },
+    {
+      "name": "a dark ground with a gold, amber or yellow action",
+      "canvas": {
+        "mode": "dark"
+      },
+      "action_hue": [
+        50,
+        110
+      ]
+    }
+  ]
+}
